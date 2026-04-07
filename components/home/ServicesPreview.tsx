@@ -107,7 +107,7 @@ export function ServicesPreview() {
             className={`
               hidden lg:flex
               absolute right-0 top-1/2 -translate-y-1/2 z-10
-              translate-x-full mr-[-12px]
+              translate-x-full mr-3
               w-11 h-11 items-center justify-center rounded-full
               border border-white/20 bg-white/10 backdrop-blur-md
               text-white transition-all duration-200
