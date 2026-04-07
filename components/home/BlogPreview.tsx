@@ -1,7 +1,7 @@
 //components/home/BlogPreview
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { LuArrowRight } from "react-icons/lu";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,7 +34,106 @@ const blogPosts = [
   },
 ];
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
+
 export function BlogPreview() {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return (
+      <section className="py-32 relative">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          {/* Header */}
+          <div className="mb-16 flex items-end justify-between">
+            <div>
+              <h2 className="text-4xl lg:text-5xl text-white mb-4">Latest Insights</h2>
+              <p className="text-white/60 text-lg">
+                Thoughts, stories, and ideas from our team
+              </p>
+            </div>
+            <Link href="/blog">
+              <button className="hidden md:flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors duration-300">
+                View All Posts
+                <LuArrowRight className="w-5 h-5" />
+              </button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Featured post */}
+            <div className="lg:col-span-7 group cursor-pointer">
+              <div className="relative h-full bg-white/5 rounded-3xl overflow-hidden border border-white/10">
+                <div className="aspect-16/10 relative overflow-hidden">
+                  <Image
+                    src={blogPosts[0].image}
+                    alt={blogPosts[0].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 1024px) 100vw, 58vw"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#15233e] via-[#15233e]/50 to-transparent" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="px-3 py-1 bg-amber-400/20 text-amber-400 text-sm rounded-full">
+                      {blogPosts[0].category}
+                    </span>
+                    <span className="text-white/60 text-sm">{blogPosts[0].readTime}</span>
+                  </div>
+                  <h3 className="text-3xl text-white mb-3 group-hover:text-amber-400 transition-colors duration-300">
+                    {blogPosts[0].title}
+                  </h3>
+                  <p className="text-white/70 leading-relaxed">{blogPosts[0].excerpt}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Secondary posts */}
+            <div className="lg:col-span-5 space-y-6">
+              {blogPosts.slice(1).map((post) => (
+                <div key={post.title} className="group cursor-pointer">
+                  <div className="flex gap-4 p-6 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300">
+                    <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0 relative">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        sizes="96px"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs text-amber-400">{post.category}</span>
+                        <span className="text-xs text-white/40">•</span>
+                        <span className="text-xs text-white/60">{post.readTime}</span>
+                      </div>
+                      <h4 className="text-white group-hover:text-amber-400 transition-colors duration-300 leading-snug">
+                        {post.title}
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Desktop — full motion
+  const { motion } = require("framer-motion");
+
   return (
     <section className="py-32 relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -83,7 +182,6 @@ export function BlogPreview() {
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-[#15233e] via-[#15233e]/50 to-transparent" />
               </div>
-
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <div className="flex items-center gap-4 mb-4">
                   <span className="px-3 py-1 bg-amber-400/20 text-amber-400 text-sm rounded-full">
