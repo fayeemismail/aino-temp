@@ -37,7 +37,7 @@ export function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#15233e]/80 backdrop-blur-xl shadow-lg "
+          ? "bg-[#15233e]/90 backdrop-blur-xl shadow-lg "
           : "bg-transparent"
       }`}
     >
@@ -48,7 +48,7 @@ export function Navbar() {
           <Link href="/" className="group">
             <div className="text-2xl tracking-tight">
               <span className="text-white font-light">Ainor</span>
-              <span className="text-amber-400">ax</span>
+              <span className="text-blue-400">ax</span>
             </div>
           </Link>
 
@@ -64,7 +64,9 @@ export function Navbar() {
                 >
                   <span
                     className={`text-sm tracking-wide transition-colors duration-300 ${
-                      isActive ? "text-amber-400" : "text-white/80 hover:text-white"
+                      isActive 
+                        ? "text-blue-400" 
+                        : "text-white/80 hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -72,7 +74,7 @@ export function Navbar() {
 
                   {/* Active indicator */}
                   {isActive && (
-                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-amber-400" />
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-linear-to-r from-blue-400 to-purple-400" />
                   )}
 
                   {/* Hover underline */}
@@ -107,7 +109,9 @@ export function Navbar() {
                   href={item.path}
                   onClick={() => setIsMenuOpen(false)}
                   className={`text-lg tracking-wide transition-colors py-1 ${
-                    isActive ? "text-amber-400" : "text-white/80 hover:text-white"
+                    isActive 
+                      ? "text-blue-400" 
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   {item.label}

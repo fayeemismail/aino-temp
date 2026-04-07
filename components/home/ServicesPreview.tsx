@@ -150,7 +150,7 @@ export function ServicesPreview() {
                       <service.icon className="w-8 h-8 text-white" />
                     </motion.div>
                   </div>
-                  <h3 className="text-2xl text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-amber-400 group-hover:to-orange-400 transition-all duration-300">
+                  <h3 className="text-2xl text-white mb-3 group-hover:text-blue-500 group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-amber-400 group-hover:to-orange-400 transition-all duration-300">
                     {service.title}
                   </h3>
                   <p className="text-white/60 leading-relaxed">{service.description}</p>
