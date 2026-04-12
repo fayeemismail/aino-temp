@@ -1,4 +1,3 @@
-// layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/common/Navbar";
@@ -6,6 +5,7 @@ import { Footer } from "@/components/common/Footer";
 import { getNavbar } from "@/lib/data/common/navbarData";
 import Loader from "@/components/common/Loader";
 import { getBackground } from "@/lib/data/common/bgData";
+import { getFooter } from "@/lib/data/common/footerData";
 
 export const metadata: Metadata = {
   title: "Ainorax – Transforming Ideas into Intelligent Digital Experiences",
@@ -20,13 +20,13 @@ export default async function RootLayout({
 }) {
   const navbarData = await getNavbar();
   const bg = await getBackground();
-  console.log(bg)
+  const footer = await getFooter();
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className="min-h-screen "
-        style={{ backgroundColor: bg?.bgColor , color: "white" }}
+        className="min-h-screen"
+        style={{ backgroundColor: bg?.bgColor, color: "white" }}
         suppressHydrationWarning
       >
         <Navbar initialData={navbarData} />
@@ -34,7 +34,7 @@ export default async function RootLayout({
           <Loader />
           {children}
         </main>
-        <Footer />
+        {footer && <Footer data={footer} />}
       </body>
     </html>
   );
