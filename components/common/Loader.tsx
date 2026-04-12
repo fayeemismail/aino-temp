@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { LuZap } from "react-icons/lu";
 import { useEffect, useState } from "react";
 
-export default function Loader() {
+export default function Loader() { 
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {

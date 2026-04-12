@@ -2,19 +2,19 @@
 
 /* Critical: sets bg color before any JS or CSS loads */
 :root {
-  --bg-primary: #15233e;
-  --bg-card: #1a2d52;
+  
+
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    background-color: #15233e;
+    
   }
 
   body {
-    background-color: #15233e;
+    
     min-height: 100vh;
     color: white;
     overflow-x: hidden;

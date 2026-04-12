@@ -5,6 +5,7 @@ import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { getNavbar } from "@/lib/data/common/navbarData";
 import Loader from "@/components/common/Loader";
+import { getBackground } from "@/lib/data/common/bgData";
 
 export const metadata: Metadata = {
   title: "Ainorax – Transforming Ideas into Intelligent Digital Experiences",
@@ -18,12 +19,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const navbarData = await getNavbar();
+  const bg = await getBackground();
+  console.log(bg)
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className="min-h-screen bg-[#15233e]"
-        style={{ backgroundColor: "#15233e", color: "white" }}
+        className="min-h-screen "
+        style={{ backgroundColor: bg?.bgColor , color: "white" }}
         suppressHydrationWarning
       >
         <Navbar initialData={navbarData} />
