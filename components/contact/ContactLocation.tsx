@@ -1,46 +1,97 @@
 "use client";
 
 import { LuMapPin, LuPhone } from "react-icons/lu";
+import type { IconType } from "react-icons";
+import type { ContactLocation as ContactLocationData } from "@/lib/data/contact/contactLocationData";
 
-export function ContactLocation() {
+interface ContactLocationProps {
+  data: ContactLocationData;
+}
+
+const iconMap: Record<string, IconType> = {
+  LuMapPin: LuMapPin,
+  LuPhone: LuPhone,
+};
+
+export function ContactLocation({ data }: ContactLocationProps) {
+  const { locationCard, businessHours, background } = data;
+
+  const LocationIcon = locationCard?.icon ? iconMap[locationCard.icon] : undefined;
+  const HoursIcon = businessHours?.icon ? iconMap[businessHours.icon] : undefined;
+
   return (
     <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
-      {/* Background animated element - kept as static for visual consistency */}
-      <div 
-        className="absolute top-1/2 w-96 h-96 bg-linear-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"
+      <div
+        className="absolute top-1/2 w-96 h-96 rounded-full blur-3xl"
+        style={{ background }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+
           {/* Location Card */}
-          <div className="p-8 bg-white/5 backdrop-blur-lg rounded-3xl border border-white/10">
-            <LuMapPin className="w-12 h-12 text-amber-400 mb-6" />
-            <h3 className="text-2xl text-white mb-4 font-medium">Our Location</h3>
-            <p className="text-white/70 leading-relaxed mb-4">
-              123 Innovation Street
-              <br />
-              San Francisco, CA 94105
-              <br />
-              United States
-            </p>
-            <p className="text-white/60 text-sm">
-              Located in the heart of San Francisco&apos;s tech district
-            </p>
-          </div>
+          {locationCard && (
+            <div
+              className="p-8 backdrop-blur-lg rounded-3xl border"
+              style={{ background: locationCard.theme?.bg, borderColor: locationCard.theme?.border }}
+            >
+              {LocationIcon && (
+                <LocationIcon className="w-12 h-12 mb-6" style={{ color: locationCard.theme?.iconColor }} />
+              )}
+              {locationCard.title && (
+                <h3 className="text-2xl mb-4 font-medium" style={{ color: locationCard.theme?.textPrimary }}>
+                  {locationCard.title}
+                </h3>
+              )}
+              {locationCard.address && locationCard.address.length > 0 && (
+                <p className="leading-relaxed mb-4" style={{ color: locationCard.theme?.textSecondary }}>
+                  {locationCard.address.map((line: string, i: number) => (
+                    <span key={i}>
+                      {line}
+                      {i < locationCard.address!.length - 1 && <br />}
+                    </span>
+                  ))}
+                </p>
+              )}
+              {locationCard.description && (
+                <p className="text-sm" style={{ color: locationCard.theme?.textSecondary, opacity: 0.85 }}>
+                  {locationCard.description}
+                </p>
+              )}
+            </div>
+          )}
 
           {/* Business Hours Card */}
-          <div className="p-8 bg-white/5 backdrop-blur-lg rounded-3xl border border-white/10">
-            <div className="inline-block mb-6">
-              <LuPhone className="w-12 h-12 text-cyan-400" />
+          {businessHours && (
+            <div
+              className="p-8 backdrop-blur-lg rounded-3xl border"
+              style={{ background: businessHours.theme?.bg, borderColor: businessHours.theme?.border }}
+            >
+              {HoursIcon && (
+                <div className="inline-block mb-6">
+                  <HoursIcon className="w-12 h-12" style={{ color: businessHours.theme?.iconColor }} />
+                </div>
+              )}
+              {businessHours.title && (
+                <h3 className="text-2xl mb-4 font-medium" style={{ color: businessHours.theme?.textPrimary }}>
+                  {businessHours.title}
+                </h3>
+              )}
+              {businessHours.hours && businessHours.hours.length > 0 && (
+                <div className="space-y-2" style={{ color: businessHours.theme?.textSecondary }}>
+                  {businessHours.hours.map((line: string, i: number) => (
+                    <p key={i}>{line}</p>
+                  ))}
+                </div>
+              )}
+              {businessHours.timezone && (
+                <p className="text-sm mt-4" style={{ color: businessHours.theme?.textSecondary, opacity: 0.85 }}>
+                  {businessHours.timezone}
+                </p>
+              )}
             </div>
-            <h3 className="text-2xl text-white mb-4 font-medium">Business Hours</h3>
-            <div className="space-y-2 text-white/70">
-              <p>Monday – Friday: 9:00 AM – 6:00 PM</p>
-              <p>Saturday: 10:00 AM – 4:00 PM</p>
-              <p>Sunday: Closed</p>
-            </div>
-            <p className="text-white/60 text-sm mt-4">Pacific Standard Time (PST)</p>
-          </div>
+          )}
+
         </div>
       </div>
     </section>

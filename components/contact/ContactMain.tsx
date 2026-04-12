@@ -3,35 +3,23 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { LuLoader, LuMail, LuMapPin, LuPhone, LuSend } from "react-icons/lu";
+import type { IconType } from "react-icons";
+import type { ContactMain as ContactMainData, ContactCard } from "@/lib/data/contact/contactMainData";
 
-const contactCards = [
-  {
-    icon: LuMail,
-    title: "Email Us",
-    value: "hello@ainorax.com",
-    description: "We'll respond within 24 hours",
-    color: "from-cyan-500 to-blue-500",
-  },
-  {
-    icon: LuPhone,
-    title: "Call Us",
-    value: "+1 (555) 123-4567",
-    description: "Mon–Fri, 9AM–6PM PST",
-    color: "from-purple-500 to-pink-500",
-  },
-  {
-    icon: LuMapPin,
-    title: "Visit Us",
-    value: "San Francisco, CA",
-    description: "Schedule a meeting",
-    color: "from-amber-500 to-orange-500",
-  },
-];
+interface ContactMainProps {
+  data: ContactMainData;
+}
 
-export function ContactMain() {
+const iconMap: Record<string, IconType> = {
+  LuMail: LuMail,
+  LuPhone: LuPhone,
+  LuMapPin: LuMapPin,
+};
+
+export function ContactMain({ data }: ContactMainProps) {
+  const { comingSoon, rightIntro, contactCards, quickResponse } = data;
   const [particles, setParticles] = useState<Array<{ left: string }>>([]);
 
-  // Generate particle positions only on the client to prevent hydration mismatch
   useEffect(() => {
     const newParticles = Array.from({ length: 20 }).map(() => ({
       left: `${Math.random() * 100}%`,
@@ -43,6 +31,7 @@ export function ContactMain() {
     <section className="pb-16 sm:pb-24 lg:pb-32">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+
           {/* Coming soon panel */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -51,7 +40,7 @@ export function ContactMain() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Particle background - Fixed for hydration */}
+            {/* Particle background */}
             <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
               {particles.map((particle, i) => (
                 <motion.div
@@ -63,15 +52,15 @@ export function ContactMain() {
                     delay: Math.random() * 3,
                     ease: "easeOut",
                   }}
-                  className="absolute w-1 h-1 bg-cyan-400 rounded-full"
-                  style={{ left: particle.left, bottom: "0%" }}
+                  className="absolute w-1 h-1 rounded-full"
+                  style={{ left: particle.left, bottom: "0%", background: "#22D3EE" }}
                 />
               ))}
-
               <motion.div
                 animate={{ x: ["-100%", "100%"] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 bg-linear-to-r from-transparent via-cyan-400/10 to-transparent"
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(to right, transparent, rgba(34,211,238,0.1), transparent)" }}
               />
             </div>
 
@@ -105,22 +94,29 @@ export function ContactMain() {
                 </motion.div>
 
                 <div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 border border-cyan-400/20 mb-4 sm:mb-6">
-                    <LuLoader className="w-4 h-4 text-cyan-400 animate-spin" />
-                    <span className="text-sm text-cyan-400">Launching Soon</span>
-                  </div>
+                  {comingSoon?.badgeText && (
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 border border-cyan-400/20 mb-4 sm:mb-6">
+                      <LuLoader className="w-4 h-4 text-cyan-400 animate-spin" />
+                      <span className="text-sm text-cyan-400">{comingSoon.badgeText}</span>
+                    </div>
+                  )}
 
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl text-white mb-4 leading-tight">
-                    Contact Portal{" "}
-                    <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-400">
-                      Coming Soon
-                    </span>
-                  </h2>
-                  <p className="text-base sm:text-lg text-white/70 leading-relaxed">
-                    We&apos;re building a streamlined contact experience. In the
-                    meantime, reach out to us directly through the channels on the
-                    right.
-                  </p>
+                  {(comingSoon?.heading || comingSoon?.highlightText) && (
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl text-white mb-4 leading-tight">
+                      {comingSoon?.heading}{" "}
+                      {comingSoon?.highlightText && (
+                        <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-400">
+                          {comingSoon.highlightText}
+                        </span>
+                      )}
+                    </h2>
+                  )}
+
+                  {comingSoon?.description && (
+                    <p className="text-base sm:text-lg text-white/70 leading-relaxed">
+                      {comingSoon.description}
+                    </p>
+                  )}
                 </div>
 
                 <motion.div
@@ -140,70 +136,101 @@ export function ContactMain() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6 sm:space-y-8"
           >
-            <div>
-              <h2 className="text-2xl sm:text-3xl text-white mb-4">Reach Out Directly</h2>
-              <p className="text-white/60 leading-relaxed">
-                While our contact portal is under construction, you can still
-                connect with us through these channels.
-              </p>
-            </div>
+            {(rightIntro?.heading || rightIntro?.description) && (
+              <div>
+                {rightIntro?.heading && (
+                  <h2 className="text-2xl sm:text-3xl text-white mb-4">{rightIntro.heading}</h2>
+                )}
+                {rightIntro?.description && (
+                  <p className="text-white/60 leading-relaxed">{rightIntro.description}</p>
+                )}
+              </div>
+            )}
 
             <div className="space-y-4">
-              {contactCards.map((contact, index) => (
-                <motion.div
-                  key={contact.title}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  whileHover={{ x: 5 }}
-                  className="group relative p-5 sm:p-6 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer"
-                >
-                  <div className="flex items-start gap-4">
-                    <motion.div
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                      className={`w-10 h-10 sm:w-12 sm:h-12 bg-linear-to-br ${contact.color} rounded-xl flex items-center justify-center shrink-0`}
-                    >
-                      <contact.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </motion.div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-white mb-1 font-medium text-sm sm:text-base">{contact.title}</h3>
-                      <p className="text-base sm:text-lg text-amber-400 mb-1 truncate">{contact.value}</p>
-                      <p className="text-xs sm:text-sm text-white/50">{contact.description}</p>
-                    </div>
-                  </div>
+              {contactCards?.map((contact: ContactCard, index: number) => {
+                const Icon = contact.icon ? iconMap[contact.icon] : undefined;
+                return (
                   <motion.div
-                    className={`absolute inset-0 bg-linear-to-br ${contact.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
-                  />
-                </motion.div>
-              ))}
+                    key={contact.title ?? index}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    whileHover={{ x: 5 }}
+                    className="group relative p-5 sm:p-6 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 transition-all duration-300 cursor-pointer"
+                    onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                      if (contact.theme?.hoverBg) e.currentTarget.style.background = contact.theme.hoverBg;
+                    }}
+                    onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                    }}
+                  >
+                    <div className="flex items-start gap-4">
+                      {Icon && (
+                        <motion.div
+                          whileHover={{ rotate: 360, scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                          className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0"
+                          style={{ background: contact.theme?.gradient }}
+                        >
+                          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        </motion.div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        {contact.title && (
+                          <h3 className="text-white mb-1 font-medium text-sm sm:text-base">{contact.title}</h3>
+                        )}
+                        {contact.value && (
+                          <p className="text-base sm:text-lg text-amber-400 mb-1 truncate">{contact.value}</p>
+                        )}
+                        {contact.description && (
+                          <p className="text-xs sm:text-sm text-white/50">{contact.description}</p>
+                        )}
+                      </div>
+                    </div>
+                    <motion.div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300"
+                      style={{ background: contact.theme?.gradient }}
+                    />
+                  </motion.div>
+                );
+              })}
             </div>
 
-            {/* Quick response guarantee */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="p-5 sm:p-6 bg-linear-to-br from-amber-400/10 to-orange-400/10 backdrop-blur-lg rounded-2xl border border-amber-400/20"
-            >
-              <div className="flex items-start gap-4">
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="w-10 h-10 sm:w-12 sm:h-12 bg-linear-to-br from-amber-400 to-orange-400 rounded-full flex items-center justify-center shrink-0"
-                >
-                  <LuLoader className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </motion.div>
-                <div>
-                  <h3 className="text-white mb-2 font-medium text-sm sm:text-base">Quick Response Guarantee</h3>
-                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed">
-                    We value your time. Expect a response within 24 hours on business days.
-                  </p>
+            {/* Quick response */}
+            {quickResponse && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="p-5 sm:p-6 backdrop-blur-lg rounded-2xl border"
+                style={{
+                  background: quickResponse.theme?.bg,
+                  borderColor: quickResponse.theme?.border,
+                }}
+              >
+                <div className="flex items-start gap-4">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"
+                    style={{ background: quickResponse.theme?.gradient }}
+                  >
+                    <LuLoader className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </motion.div>
+                  <div>
+                    {quickResponse.title && (
+                      <h3 className="text-white mb-2 font-medium text-sm sm:text-base">{quickResponse.title}</h3>
+                    )}
+                    {quickResponse.description && (
+                      <p className="text-white/70 text-xs sm:text-sm leading-relaxed">{quickResponse.description}</p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </div>
