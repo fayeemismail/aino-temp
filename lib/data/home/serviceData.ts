@@ -3,7 +3,7 @@ import { client } from "@/lib/sanity";
 export interface ServiceItem {
   title: string;
   description: string;
-  icon: "code" | "brain" | "cart" | "cloud";
+  icon: "code" | "brain" | "cart" | "cloud" | "megaphone" | "search";
   gradient: string;
 }
 

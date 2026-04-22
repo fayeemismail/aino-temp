@@ -3,7 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { LuArrowLeft, LuArrowRight, LuBrain, LuCloud, LuCode, LuShoppingCart } from "react-icons/lu";
+import { LuArrowLeft, LuArrowRight, LuBrain, LuCloud, LuCode, LuMegaphone, LuSearch, LuShoppingCart } from "react-icons/lu";
 import { ServicesData, ServicesSection } from "@/types/home/serviceTypes";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -11,6 +11,8 @@ const iconMap: Record<string, React.ElementType> = {
   brain: LuBrain,
   cart: LuShoppingCart,
   cloud: LuCloud,
+  megaphone: LuMegaphone,
+  search: LuSearch
 };
 
 interface ServicesPreviewProps {
