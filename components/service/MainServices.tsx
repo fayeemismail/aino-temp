@@ -15,8 +15,8 @@ const iconMap: Record<string, IconType> = {
   LuBrain: LuBrain,
   LuShoppingCart: LuShoppingCart,
   LuCloud: LuCloud,
-  megaphone: LuMegaphone,
-  search: LuSearch
+  LuMegaphone: LuMegaphone,
+  LuSearch: LuSearch
 };
 
 export function MainServices({ data }: MainServicesProps) {

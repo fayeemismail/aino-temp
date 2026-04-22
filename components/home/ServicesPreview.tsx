@@ -126,7 +126,7 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
           <button
             onClick={() => scroll("right")}
             disabled={!canScrollRight}
-            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 translate-x-full mr-3 w-11 h-11 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-200 hover:bg-white/20 hover:border-white/40 disabled:opacity-20"
+            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 translate-x-[calc(100%+20px)] mr-3 w-11 h-11 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-200 hover:bg-white/20 hover:border-white/40 disabled:opacity-20"
             style={{
               backgroundColor: data.theme?.arrowBg,
               borderColor: data.theme?.arrowBorder,
