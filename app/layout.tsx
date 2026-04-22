@@ -8,9 +8,52 @@ import { getBackground } from "@/lib/data/common/bgData";
 import { getFooter } from "@/lib/data/common/footerData";
 
 export const metadata: Metadata = {
-  title: "Ainorax – Transforming Ideas into Intelligent Digital Experiences",
+  metadataBase: new URL("https://ainorax.vercel.app"),
+
+  title: {
+    default: "Ainorax – Intelligent Digital Experiences",
+    template: "%s | Ainorax",
+  },
+
   description:
-    "Ainorax is a full-service technology agency specializing in modern web development, cutting-edge AI solutions, and data-driven growth.",
+    "Ainorax is a full-service technology agency specializing in modern web development, AI solutions, and data-driven growth.",
+
+  keywords: [
+    "Ainorax",
+    "Web Development",
+    "AI Solutions",
+    "Digital Agency",
+    "Software Development",
+  ],
+
+  openGraph: {
+    title: "Ainorax – Intelligent Digital Experiences",
+    description:
+      "Transforming ideas into intelligent digital experiences with AI and modern development.",
+    url: "https://ainorax.vercel.app",
+    siteName: "Ainorax",
+    images: [
+      {
+        url: "https://ainorax.vercel.app/og-image.png", // ⚠️ create this
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Ainorax – Intelligent Digital Experiences",
+    description:
+      "AI-powered solutions, web development, and digital transformation.",
+    images: ["https://ainorax.vercel.app/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default async function RootLayout({

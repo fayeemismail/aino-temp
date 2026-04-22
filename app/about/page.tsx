@@ -12,9 +12,15 @@ import { getAboutStory } from "@/lib/data/about/aboutStoryData";
 import { getAboutValues } from "@/lib/data/about/aboutValuesData";
 
 export const metadata = {
-  title: "About – Ainorax",
+  title: "About Ainorax – Our Story & Vision",
   description:
-    "Learn about Ainorax — our story, mission, values, and the team behind your digital transformation.",
+    "Discover Ainorax's mission, values, and team driving digital transformation through AI and modern technology.",
+  openGraph: {
+    title: "About Ainorax",
+    description:
+      "Learn about our journey, mission, and innovative approach.",
+    url: "https://ainorax.vercel.app/about",
+  },
 };
 
 export default async function AboutPage() {
