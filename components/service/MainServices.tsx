@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { LuBrain, LuCircleCheck, LuCloud, LuCode, LuShoppingCart } from "react-icons/lu";
+import { LuBrain, LuCircleCheck, LuCloud, LuCode, LuMegaphone, LuSearch, LuShoppingCart } from "react-icons/lu";
 import type { IconType } from "react-icons";
 import type { MainServiceItem } from "@/lib/data/service/mainServicesData";
 
@@ -15,6 +15,8 @@ const iconMap: Record<string, IconType> = {
   LuBrain: LuBrain,
   LuShoppingCart: LuShoppingCart,
   LuCloud: LuCloud,
+  megaphone: LuMegaphone,
+  search: LuSearch
 };
 
 export function MainServices({ data }: MainServicesProps) {
