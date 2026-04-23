@@ -10,9 +10,9 @@ import { getServicesCTA } from "@/lib/data/service/servicesCTAData";
 import { getServicesHero } from "@/lib/data/service/servicesHeroData";
 
 export const metadata = {
-  title: "Services – Ainorax",
+  title: "Services – Web, AI & Digital Solutions | Ainorax",
   description:
-    "Explore Ainorax's full range of services: web & mobile development, AI & data, digital commerce, cloud, QA, and support.",
+    "Explore Ainorax services including web development, AI solutions, cloud, and digital transformation.",
 };
 
 export default async function ServicesPage() {

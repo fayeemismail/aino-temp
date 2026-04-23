@@ -8,9 +8,9 @@ import { getFeaturedPost } from "@/lib/data/blog/featuredPostData";
 import { getRecentPosts } from "@/lib/data/blog/recentPostData";
 
 export const metadata = {
-  title: "Blog – Ainorax",
+  title: "Ainorax Blog – Insights on AI & Development",
   description:
-    "Insights, stories, and ideas from the Ainorax team on web development, AI, cloud, and digital innovation.",
+    "Read insights on AI, web development, and digital innovation from Ainorax.",
 };
 
 export default async function BlogPage() {

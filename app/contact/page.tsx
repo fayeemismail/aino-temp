@@ -8,9 +8,9 @@ import { getContactLocation } from "@/lib/data/contact/contactLocationData";
 import { getContactMain } from "@/lib/data/contact/contactMainData";
 
 export const metadata = {
-  title: "Contact – Ainorax",
+  title: "Contact Ainorax – Start Your Project",
   description:
-    "Get in touch with Ainorax. We'd love to hear about your project and discuss how we can help.",
+    "Contact Ainorax to build your next web, AI, or digital solution.",
 };
 
 export default async function ContactPage() {
