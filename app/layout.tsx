@@ -8,7 +8,7 @@ import { getBackground } from "@/lib/data/common/bgData";
 import { getFooter } from "@/lib/data/common/footerData";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ainorax.vercel.app"),
+  metadataBase: new URL("https://ainorax.com"),
 
   title: {
     default: "Ainorax – Intelligent Digital Experiences",
@@ -30,11 +30,11 @@ export const metadata: Metadata = {
     title: "Ainorax – Intelligent Digital Experiences",
     description:
       "Transforming ideas into intelligent digital experiences with AI and modern development.",
-    url: "https://ainorax.vercel.app",
+    url: "https://ainorax.com",
     siteName: "Ainorax",
     images: [
       {
-        url: "https://ainorax.vercel.app/og-image.png", // ⚠️ create this
+        url: "https://ainorax.com/og-image.png", // ⚠️ create this
         width: 1200,
         height: 630,
       },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "Ainorax – Intelligent Digital Experiences",
     description:
       "AI-powered solutions, web development, and digital transformation.",
-    images: ["https://ainorax.vercel.app/og-image.png"],
+    images: ["https://ainorax.com/og-image.png"],
   },
 
   robots: {

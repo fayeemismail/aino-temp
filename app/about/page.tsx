@@ -19,7 +19,7 @@ export const metadata = {
     title: "About Ainorax",
     description:
       "Learn about our journey, mission, and innovative approach.",
-    url: "https://ainorax.vercel.app/about",
+    url: "https://ainorax.com/about",
   },
 };
 
