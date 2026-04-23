@@ -13,6 +13,8 @@ import { getHero } from "@/lib/data/home/heroData";
 import { getServices } from "@/lib/data/home/serviceData";
 import { getWhyChooseUs } from "@/lib/data/home/whyChooseUs";
 
+export const dynamic = "force-static";
+
 export default async function Home() {
   const hero = await getHero();
   const services = await getServices();

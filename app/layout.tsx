@@ -9,6 +9,9 @@ import { getFooter } from "@/lib/data/common/footerData";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ainorax.com"),
+  alternates: {
+    canonical: "https://ainorax.com",
+  },
 
   title: {
     default: "Ainorax – Intelligent Digital Experiences",
@@ -74,8 +77,8 @@ export default async function RootLayout({
       >
         <Navbar initialData={navbarData} />
         <main>
-          <Loader />
           {children}
+          <Loader />
         </main>
         {footer && <Footer data={footer} />}
       </body>

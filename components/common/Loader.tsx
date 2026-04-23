@@ -6,17 +6,14 @@ import { LuZap } from "react-icons/lu";
 import { useEffect, useState } from "react";
 
 export default function Loader() { 
-  const [visible, setVisible] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-    }, 1600);
-
+    const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
-  if (!visible) return null;
+  if (!loading) return null;
 
   return (
     <motion.div
