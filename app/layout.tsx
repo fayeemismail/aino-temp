@@ -6,6 +6,7 @@ import { getNavbar } from "@/lib/data/common/navbarData";
 import Loader from "@/components/common/Loader";
 import { getBackground } from "@/lib/data/common/bgData";
 import { getFooter } from "@/lib/data/common/footerData";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.ainorax.com"),
@@ -70,6 +71,8 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+
+
       <body
         className="min-h-screen"
         style={{ backgroundColor: bg?.bgColor, color: "white" }}
@@ -77,7 +80,9 @@ export default async function RootLayout({
       >
         <Navbar initialData={navbarData} />
         <main>
+          <GoogleTagManager gtmId="GTM-MHDFDVJT" />
           {children}
+          <GoogleAnalytics gaId="G-N9JEHEQ812" />
           <Loader />
         </main>
         {footer && <Footer data={footer} />}
