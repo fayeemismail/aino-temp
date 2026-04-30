@@ -102,6 +102,6 @@ export const SERVICES_COMING_SOON_QUERY = `
 
 // ✅ Fetch Function
 export async function getServicesComingSoon(): Promise<ServicesComingSoon | null> {
-  const data = await client.fetch(SERVICES_COMING_SOON_QUERY);
+  const data = await client.fetch(SERVICES_COMING_SOON_QUERY, {}, { cache: "no-store"});
   return data?.servicesComingSoon || null;
 }

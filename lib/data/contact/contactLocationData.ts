@@ -75,6 +75,6 @@ export const CONTACT_LOCATION_QUERY = `
 
 // ✅ Fetch Function
 export async function getContactLocation(): Promise<ContactLocation | null> {
-  const data = await client.fetch(CONTACT_LOCATION_QUERY);
+  const data = await client.fetch(CONTACT_LOCATION_QUERY, {}, { cache: "no-store"});
   return data?.contactLocation || null;
 }

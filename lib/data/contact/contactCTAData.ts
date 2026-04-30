@@ -39,6 +39,6 @@ export const CONTACT_CTA_QUERY = `
 
 // ✅ Fetch Function
 export async function getContactCTA(): Promise<ContactCTA | null> {
-  const data = await client.fetch(CONTACT_CTA_QUERY);
+  const data = await client.fetch(CONTACT_CTA_QUERY, {}, { cache: "no-store"});
   return data?.contactCTA || null;
 }

@@ -115,6 +115,6 @@ export const FOOTER_QUERY = `
 
 // ✅ Fetch Function
 export async function getFooter(): Promise<FooterData | null> {
-  const data = await client.fetch(FOOTER_QUERY);
+  const data = await client.fetch(FOOTER_QUERY, {}, { cache: "no-store"});
   return data || null;
 }

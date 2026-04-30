@@ -62,7 +62,7 @@ export const CLIENTS_SECTION_QUERY = `
 
 export const getClientsSection = async (): Promise<ClientsSection | null> => {
   try {
-    const data = await client.fetch(CLIENTS_SECTION_QUERY);
+    const data = await client.fetch(CLIENTS_SECTION_QUERY, {}, { cache: "no-store"});
     return data?.clientsSection || null;
   } catch (error) {
     console.error("Error fetching clients section:", error);

@@ -83,6 +83,6 @@ export const ABOUT_QUERY = `
 
 
 export async function getAboutPreview(): Promise<AboutPreview | null> {
-  const data = await client.fetch(ABOUT_QUERY);
+  const data = await client.fetch(ABOUT_QUERY, {}, { cache: "no-store"});
   return data?.aboutPreview || null;
 }

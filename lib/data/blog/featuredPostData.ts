@@ -74,6 +74,6 @@ export const FEATURED_POST_QUERY = `
 
 // ✅ Fetch Function
 export async function getFeaturedPost(): Promise<FeaturedPost | null> {
-  const data = await client.fetch(FEATURED_POST_QUERY);
+  const data = await client.fetch(FEATURED_POST_QUERY, {}, { cache: "no-store"});
   return data?.featuredPost || null;
 }

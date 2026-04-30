@@ -23,6 +23,7 @@ export default async function Home() {
   const clients = await getClientsSection();
   const blog = await getBlogPreview();
   const cta = await getCTA();
+  console.log(services)
 
   return (
     <main>

@@ -42,6 +42,6 @@ export const ABOUT_HERO_QUERY = `
 
 // ✅ Fetch Function
 export async function getAboutHero(): Promise<AboutHero | null> {
-  const data = await client.fetch(ABOUT_HERO_QUERY);
+  const data = await client.fetch(ABOUT_HERO_QUERY, {}, { cache: "no-store"});
   return data?.aboutHero || null;
 }

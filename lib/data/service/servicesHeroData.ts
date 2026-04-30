@@ -60,6 +60,6 @@ export const SERVICES_HERO_QUERY = `
 
 // ✅ Fetch Function
 export async function getServicesHero(): Promise<ServicesHero | null> {
-  const data = await client.fetch(SERVICES_HERO_QUERY);
+  const data = await client.fetch(SERVICES_HERO_QUERY, {}, { cache: "no-store"});
   return data?.servicesHero || null;
 }

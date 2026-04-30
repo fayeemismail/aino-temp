@@ -68,7 +68,7 @@ export const servicesQuery = `
 
 
 export async function getServices(): Promise<ServicesSection | null> {
-  const data: HomeData = await client.fetch(servicesQuery);
+  const data: HomeData = await client.fetch(servicesQuery, {}, { cache: "no-store"});
 
   return data?.services || null;
 }

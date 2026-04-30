@@ -89,6 +89,6 @@ export const RECENT_POSTS_QUERY = `
 
 // ✅ Fetch Function
 export async function getRecentPosts(): Promise<RecentPostsSection | null> {
-  const data = await client.fetch(RECENT_POSTS_QUERY);
+  const data = await client.fetch(RECENT_POSTS_QUERY, {}, { cache: "no-store"});
   return data?.recentPosts || null;
 }

@@ -51,6 +51,6 @@ export const MAIN_SERVICES_QUERY = `
 
 // ✅ Fetch Function
 export async function getMainServices(): Promise<MainServiceItem[] | null> {
-  const data = await client.fetch(MAIN_SERVICES_QUERY);
+  const data = await client.fetch(MAIN_SERVICES_QUERY, {}, { cache: "no-store"});
   return data?.mainServices?.services || null;
 }

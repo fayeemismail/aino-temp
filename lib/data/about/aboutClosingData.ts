@@ -65,6 +65,6 @@ export const ABOUT_CLOSING_QUERY = `
 // ✅ Fetch Function
 
 export async function getAboutClosing(): Promise<AboutClosing | null> {
-  const data = await client.fetch(ABOUT_CLOSING_QUERY);
+  const data = await client.fetch(ABOUT_CLOSING_QUERY, {}, { cache: "no-store"});
   return data?.aboutClosing || null;
 }

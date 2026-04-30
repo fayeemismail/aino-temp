@@ -17,6 +17,6 @@ export const BACKGROUND_QUERY = `
 
 // ✅ Fetch Function
 export async function getBackground(): Promise<BackgroundData | null> {
-  const data = await client.fetch(BACKGROUND_QUERY);
+  const data = await client.fetch(BACKGROUND_QUERY, {}, { cache: "no-store"});
   return data || null;
 }

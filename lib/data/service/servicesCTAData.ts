@@ -57,6 +57,6 @@ export const SERVICES_CTA_QUERY = `
 
 // ✅ Fetch Function
 export async function getServicesCTA(): Promise<ServicesCTA | null> {
-  const data = await client.fetch(SERVICES_CTA_QUERY);
+  const data = await client.fetch(SERVICES_CTA_QUERY, {}, { cache: "no-store"});
   return data?.servicesCTA || null;
 }

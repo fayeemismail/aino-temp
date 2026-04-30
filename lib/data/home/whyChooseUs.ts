@@ -58,7 +58,7 @@ export const whyChooseUsQuery = `
 
 
 export async function getWhyChooseUs(): Promise<WhyChooseUsSection | null> {
-  const data = await client.fetch(whyChooseUsQuery);
+  const data = await client.fetch(whyChooseUsQuery, {}, { cache: "no-store"});
 
   return data?.whyChooseUs ?? null;
 }

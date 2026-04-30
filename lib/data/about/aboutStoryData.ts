@@ -73,6 +73,6 @@ export const ABOUT_STORY_QUERY = `
 // ✅ Fetch Function
 
 export async function getAboutStory(): Promise<AboutStory | null> {
-  const data = await client.fetch(ABOUT_STORY_QUERY);
+  const data = await client.fetch(ABOUT_STORY_QUERY, {}, { cache: "no-store"});
   return data?.aboutStory || null;
 }

@@ -98,6 +98,6 @@ export const CONTACT_MAIN_QUERY = `
 
 // ✅ Fetch Function
 export async function getContactMain(): Promise<ContactMain | null> {
-  const data = await client.fetch(CONTACT_MAIN_QUERY);
+  const data = await client.fetch(CONTACT_MAIN_QUERY, {}, { cache: "no-store"});
   return data?.contactMain || null;
 }

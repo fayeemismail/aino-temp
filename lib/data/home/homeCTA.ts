@@ -78,6 +78,6 @@ export const CTA_QUERY = `
 
 // ✅ Fetch Function
 export async function getCTA(): Promise<CTAData | null> {
-  const data = await client.fetch(CTA_QUERY);
+  const data = await client.fetch(CTA_QUERY, {}, { cache: "no-store"});
   return data?.cta || null;
 }

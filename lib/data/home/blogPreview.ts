@@ -105,6 +105,6 @@ export const BLOG_PREVIEW_QUERY = `
 `;
 
 export async function getBlogPreview(): Promise<BlogPreview | null> {
-  const data = await client.fetch(BLOG_PREVIEW_QUERY);
+  const data = await client.fetch(BLOG_PREVIEW_QUERY, {}, { cache: "no-store"});
   return data?.blogPreview || null;
 }

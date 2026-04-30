@@ -62,6 +62,6 @@ export const CONTACT_HERO_QUERY = `
 
 // ✅ Fetch Function
 export async function getContactHero(): Promise<ContactHero | null> {
-  const data = await client.fetch(CONTACT_HERO_QUERY);
+  const data = await client.fetch(CONTACT_HERO_QUERY, {}, { cache: "no-store"});
   return data?.contactHero || null;
 }

@@ -76,7 +76,7 @@ const navbarQuery = `
 
 export async function getNavbar(): Promise<Navbar | null> {
   try {
-    const data = await client.fetch(navbarQuery);
+    const data = await client.fetch(navbarQuery, {}, { cache: "no-store"});
     return data;
   } catch (error) {
     console.error("Navbar fetch error:", error);

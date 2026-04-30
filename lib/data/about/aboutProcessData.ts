@@ -77,6 +77,6 @@ export const ABOUT_PROCESS_QUERY = `
 // ✅ Fetch Function
 
 export async function getAboutProcess(): Promise<AboutProcess | null> {
-  const data = await client.fetch(ABOUT_PROCESS_QUERY);
+  const data = await client.fetch(ABOUT_PROCESS_QUERY, {}, { cache: "no-store"});
   return data?.aboutProcess || null;
 }

@@ -73,6 +73,6 @@ export const ABOUT_VALUES_QUERY = `
 // ✅ Fetch Function
 
 export async function getAboutValues(): Promise<AboutValues | null> {
-  const data = await client.fetch(ABOUT_VALUES_QUERY);
+  const data = await client.fetch(ABOUT_VALUES_QUERY, {}, { cache: "no-store"});
   return data?.aboutValues || null;
 }

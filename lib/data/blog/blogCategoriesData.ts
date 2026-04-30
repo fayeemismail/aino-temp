@@ -45,6 +45,6 @@ export const BLOG_CATEGORIES_QUERY = `
 
 // ✅ Fetch Function
 export async function getBlogCategories(): Promise<BlogCategories | null> {
-  const data = await client.fetch(BLOG_CATEGORIES_QUERY);
+  const data = await client.fetch(BLOG_CATEGORIES_QUERY, {}, { cache: "no-store"});
   return data?.blogCategories || null;
 }

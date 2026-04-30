@@ -65,6 +65,6 @@ export const BLOG_HERO_QUERY = `
 
 // ✅ Fetch Function
 export async function getBlogHero(): Promise<BlogHero | null> {
-  const data = await client.fetch(BLOG_HERO_QUERY);
+  const data = await client.fetch(BLOG_HERO_QUERY, {}, { cache: "no-store"});
   return data?.blogHero || null;
 }

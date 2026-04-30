@@ -55,6 +55,6 @@ export const ABOUT_STATS_QUERY = `
 // ✅ Fetch Function
 
 export async function getAboutStats(): Promise<AboutStats | null> {
-  const data = await client.fetch(ABOUT_STATS_QUERY);
+  const data = await client.fetch(ABOUT_STATS_QUERY, {}, { cache: "no-store"});
   return data?.aboutStats || null;
 }

@@ -74,6 +74,6 @@ export const ADDITIONAL_CAPABILITIES_QUERY = `
 
 // ✅ Fetch Function
 export async function getAdditionalCapabilities(): Promise<AdditionalCapabilities | null> {
-  const data = await client.fetch(ADDITIONAL_CAPABILITIES_QUERY);
+  const data = await client.fetch(ADDITIONAL_CAPABILITIES_QUERY, {}, { cache: "no-store"});
   return data?.additionalCapabilities || null;
 }

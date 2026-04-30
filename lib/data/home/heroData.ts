@@ -72,7 +72,7 @@ export const HERO_QUERY = `
 `;
 
 export async function getHero(): Promise<Hero | null> {
-  const data = await client.fetch(HERO_QUERY);
+  const data = await client.fetch(HERO_QUERY, {}, { cache: "no-store"});
 
   // If nested inside "home"
   return data?.hero ?? null;

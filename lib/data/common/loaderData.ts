@@ -66,6 +66,6 @@ export const LOADER_QUERY = `
 
 // ✅ Fetch Function
 export async function getLoader(): Promise<LoaderData | null> {
-  const data = await client.fetch(LOADER_QUERY);
+  const data = await client.fetch(LOADER_QUERY, {}, { cache: "no-store"});
   return data || null;
 }
