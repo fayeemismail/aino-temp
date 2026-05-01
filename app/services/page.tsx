@@ -15,12 +15,22 @@ export const metadata = {
     "Explore Ainorax services including web development, AI solutions, cloud, and digital transformation.",
 };
 
+export const revalidate = 300; // services don't change often
+
 export default async function ServicesPage() {
-  const hero = await getServicesHero();
-  const services = await getMainServices();
-  const additional = await getAdditionalCapabilities();
-  const comingSoon = await getServicesComingSoon();
-  const cta = await getServicesCTA();
+  const [
+    hero,
+    services,
+    additional,
+    comingSoon,
+    cta
+  ] = await Promise.all([
+    getServicesHero(),
+    getMainServices(),
+    getAdditionalCapabilities(),
+    getServicesComingSoon(),
+    getServicesCTA()
+  ]);
 
   return (
     <div className="min-h-screen pt-20">

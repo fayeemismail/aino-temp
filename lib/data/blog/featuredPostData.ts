@@ -1,5 +1,6 @@
 // lib/data/blog/featuredPostData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface FeaturedPostTheme {
@@ -73,7 +74,14 @@ export const FEATURED_POST_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getFeaturedPost(): Promise<FeaturedPost | null> {
-  const data = await client.fetch(FEATURED_POST_QUERY, {}, { cache: "no-store"});
-  return data?.featuredPost || null;
-}
+export const getFeaturedPost = cache(async (): Promise<FeaturedPost | null> => {
+  const data = await client.fetch(
+    FEATURED_POST_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.featuredPost ?? null;
+});

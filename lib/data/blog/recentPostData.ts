@@ -1,5 +1,6 @@
 // lib/data/blog/recentPostsData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface RecentPostTheme {
@@ -88,7 +89,14 @@ export const RECENT_POSTS_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getRecentPosts(): Promise<RecentPostsSection | null> {
-  const data = await client.fetch(RECENT_POSTS_QUERY, {}, { cache: "no-store"});
-  return data?.recentPosts || null;
-}
+export const getRecentPosts = cache(async (): Promise<RecentPostsSection | null> => {
+  const data = await client.fetch(
+    RECENT_POSTS_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.recentPosts ?? null;
+});

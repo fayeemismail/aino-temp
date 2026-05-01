@@ -1,5 +1,6 @@
 // lib/data/services/mainServicesData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface MainServiceItemTheme {
@@ -50,7 +51,14 @@ export const MAIN_SERVICES_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getMainServices(): Promise<MainServiceItem[] | null> {
-  const data = await client.fetch(MAIN_SERVICES_QUERY, {}, { cache: "no-store"});
-  return data?.mainServices?.services || null;
-}
+export const getMainServices = cache(async (): Promise<MainServiceItem[] | null> => {
+  const data = await client.fetch(
+    MAIN_SERVICES_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.mainServices?.services ?? null;
+});

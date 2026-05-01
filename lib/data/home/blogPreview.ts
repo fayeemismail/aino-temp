@@ -1,6 +1,7 @@
 // lib/data/home/blogPreview.ts
 
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 export interface BlogCard {
   title?: string;
@@ -104,7 +105,14 @@ export const BLOG_PREVIEW_QUERY = `
 }
 `;
 
-export async function getBlogPreview(): Promise<BlogPreview | null> {
-  const data = await client.fetch(BLOG_PREVIEW_QUERY, {}, { cache: "no-store"});
-  return data?.blogPreview || null;
-}
+export const getBlogPreview = cache(async (): Promise<BlogPreview | null> => {
+  const data = await client.fetch(
+    BLOG_PREVIEW_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.blogPreview ?? null;
+});

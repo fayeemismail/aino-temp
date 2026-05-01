@@ -1,5 +1,6 @@
 // lib/data/contact/contactLocationData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 
@@ -74,7 +75,14 @@ export const CONTACT_LOCATION_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getContactLocation(): Promise<ContactLocation | null> {
-  const data = await client.fetch(CONTACT_LOCATION_QUERY, {}, { cache: "no-store"});
-  return data?.contactLocation || null;
-}
+export const getContactLocation = cache(async (): Promise<ContactLocation | null> => {
+  const data = await client.fetch(
+    CONTACT_LOCATION_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.contactLocation ?? null;
+});

@@ -1,5 +1,6 @@
 // lib/data/global/bgData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface BackgroundData {
@@ -16,7 +17,14 @@ export const BACKGROUND_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getBackground(): Promise<BackgroundData | null> {
-  const data = await client.fetch(BACKGROUND_QUERY, {}, { cache: "no-store"});
-  return data || null;
-}
+export const getBackground = cache(async (): Promise<BackgroundData | null> => {
+  const data = await client.fetch(
+    BACKGROUND_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data ?? null;
+});

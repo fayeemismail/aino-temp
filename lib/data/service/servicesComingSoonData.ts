@@ -1,5 +1,6 @@
 // lib/data/services/servicesComingSoonData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface ComingSoonHeading {
@@ -101,7 +102,14 @@ export const SERVICES_COMING_SOON_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getServicesComingSoon(): Promise<ServicesComingSoon | null> {
-  const data = await client.fetch(SERVICES_COMING_SOON_QUERY, {}, { cache: "no-store"});
-  return data?.servicesComingSoon || null;
-}
+export const getServicesComingSoon = cache(async (): Promise<ServicesComingSoon | null> => {
+  const data = await client.fetch(
+    SERVICES_COMING_SOON_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.servicesComingSoon ?? null;
+});

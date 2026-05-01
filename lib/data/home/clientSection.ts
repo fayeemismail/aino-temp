@@ -1,4 +1,5 @@
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 
@@ -60,12 +61,19 @@ export const CLIENTS_SECTION_QUERY = `
 
 // ✅ Fetch Function
 
-export const getClientsSection = async (): Promise<ClientsSection | null> => {
+export const getClientsSection = cache(async (): Promise<ClientsSection | null> => {
   try {
-    const data = await client.fetch(CLIENTS_SECTION_QUERY, {}, { cache: "no-store"});
-    return data?.clientsSection || null;
+    const data = await client.fetch(
+      CLIENTS_SECTION_QUERY,
+      {},
+      {
+        next: { revalidate: 60 },
+      }
+    );
+
+    return data?.clientsSection ?? null;
   } catch (error) {
     console.error("Error fetching clients section:", error);
     return null;
   }
-};
+});

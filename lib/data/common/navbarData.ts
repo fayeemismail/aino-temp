@@ -1,4 +1,5 @@
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 export interface NavbarLogo {
   textPrimary: string;
@@ -74,12 +75,19 @@ const navbarQuery = `
 `;
 
 
-export async function getNavbar(): Promise<Navbar | null> {
+export const getNavbar = cache(async (): Promise<Navbar | null> => {
   try {
-    const data = await client.fetch(navbarQuery, {}, { cache: "no-store"});
-    return data;
+    const data = await client.fetch(
+      navbarQuery,
+      {},
+      {
+        next: { revalidate: 60 },
+      }
+    );
+
+    return data ?? null;
   } catch (error) {
     console.error("Navbar fetch error:", error);
     return null;
   }
-}
+});

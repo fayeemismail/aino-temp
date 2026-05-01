@@ -13,11 +13,20 @@ export const metadata = {
     "Read insights on AI, web development, and digital innovation from Ainorax.",
 };
 
+export const revalidate = 60;
+
 export default async function BlogPage() {
-  const hero = await getBlogHero();
-  const categories = await getBlogCategories();
-  const post = await getFeaturedPost();
-  const recent = await getRecentPosts();
+  const [
+    hero,
+    categories,
+    post,
+    recent
+  ] = await Promise.all([
+    getBlogHero(),
+    getBlogCategories(),
+    getFeaturedPost(),
+    getRecentPosts()
+  ]);
 
   return (
     <div className="min-h-screen pt-20">

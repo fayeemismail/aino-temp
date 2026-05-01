@@ -1,4 +1,5 @@
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 export interface ServiceItem {
   title: string;
@@ -67,8 +68,14 @@ export const servicesQuery = `
 
 
 
-export async function getServices(): Promise<ServicesSection | null> {
-  const data: HomeData = await client.fetch(servicesQuery, {}, { cache: "no-store"});
+export const getServices = cache(async (): Promise<ServicesSection | null> => {
+  const data: HomeData = await client.fetch(
+    servicesQuery,
+    {},
+    {
+      next: { revalidate: 60 }, // revalidate every 60 seconds
+    }
+  );
 
-  return data?.services || null;
-}
+  return data?.services ?? null;
+});

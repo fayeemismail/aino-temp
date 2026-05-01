@@ -1,5 +1,6 @@
 // lib/data/blog/blogHeroData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface BlogHeroHeading {
@@ -64,7 +65,14 @@ export const BLOG_HERO_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getBlogHero(): Promise<BlogHero | null> {
-  const data = await client.fetch(BLOG_HERO_QUERY, {}, { cache: "no-store"});
-  return data?.blogHero || null;
-}
+export const getBlogHero = cache(async (): Promise<BlogHero | null> => {
+  const data = await client.fetch(
+    BLOG_HERO_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.blogHero ?? null;
+});

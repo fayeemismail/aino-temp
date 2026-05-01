@@ -60,14 +60,23 @@ export const metadata: Metadata = {
   },
 };
 
+
+export const revalidate = 300; 
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const navbarData = await getNavbar();
-  const bg = await getBackground();
-  const footer = await getFooter();
+  const [
+    navbarData,
+    bg,
+    footer
+  ] = await Promise.all([
+    getNavbar(),
+    getBackground(),
+    getFooter()
+  ]);
 
   return (
     <html lang="en" suppressHydrationWarning>

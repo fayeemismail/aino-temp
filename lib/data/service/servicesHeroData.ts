@@ -1,5 +1,6 @@
 // lib/data/services/servicesHeroData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface ServicesHeroHeading {
@@ -59,7 +60,14 @@ export const SERVICES_HERO_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getServicesHero(): Promise<ServicesHero | null> {
-  const data = await client.fetch(SERVICES_HERO_QUERY, {}, { cache: "no-store"});
-  return data?.servicesHero || null;
-}
+export const getServicesHero = cache(async (): Promise<ServicesHero | null> => {
+  const data = await client.fetch(
+    SERVICES_HERO_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.servicesHero ?? null;
+});

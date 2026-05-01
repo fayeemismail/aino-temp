@@ -1,5 +1,6 @@
 // lib/data/services/servicesCTAData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface CTAButton {
@@ -56,7 +57,14 @@ export const SERVICES_CTA_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getServicesCTA(): Promise<ServicesCTA | null> {
-  const data = await client.fetch(SERVICES_CTA_QUERY, {}, { cache: "no-store"});
-  return data?.servicesCTA || null;
-}
+export const getServicesCTA = cache(async (): Promise<ServicesCTA | null> => {
+  const data = await client.fetch(
+    SERVICES_CTA_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.servicesCTA ?? null;
+});

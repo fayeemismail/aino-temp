@@ -1,5 +1,6 @@
 // lib/data/contact/contactMainData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 
@@ -97,7 +98,14 @@ export const CONTACT_MAIN_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getContactMain(): Promise<ContactMain | null> {
-  const data = await client.fetch(CONTACT_MAIN_QUERY, {}, { cache: "no-store"});
-  return data?.contactMain || null;
-}
+export const getContactMain = cache(async (): Promise<ContactMain | null> => {
+  const data = await client.fetch(
+    CONTACT_MAIN_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.contactMain ?? null;
+});

@@ -1,5 +1,6 @@
 // lib/data/contact/contactCTAData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface ContactCTATheme {
@@ -38,7 +39,14 @@ export const CONTACT_CTA_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getContactCTA(): Promise<ContactCTA | null> {
-  const data = await client.fetch(CONTACT_CTA_QUERY, {}, { cache: "no-store"});
-  return data?.contactCTA || null;
-}
+export const getContactCTA = cache(async (): Promise<ContactCTA | null> => {
+  const data = await client.fetch(
+    CONTACT_CTA_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.contactCTA ?? null;
+});

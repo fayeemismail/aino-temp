@@ -13,11 +13,20 @@ export const metadata = {
     "Contact Ainorax to build your next web, AI, or digital solution.",
 };
 
+export const revalidate = 60;
+
 export default async function ContactPage() {
-  const hero = await getContactHero();
-  const main = await getContactMain();
-  const contactLocation = await getContactLocation();
-  const cta = await getContactCTA();
+  const [
+    hero,
+    main,
+    contactLocation,
+    cta
+  ] = await Promise.all([
+    getContactHero(),
+    getContactMain(),
+    getContactLocation(),
+    getContactCTA()
+  ]);
 
   return (
     <div className="min-h-screen pt-20">

@@ -1,4 +1,5 @@
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 
@@ -72,7 +73,14 @@ export const ABOUT_STORY_QUERY = `
 
 // ✅ Fetch Function
 
-export async function getAboutStory(): Promise<AboutStory | null> {
-  const data = await client.fetch(ABOUT_STORY_QUERY, {}, { cache: "no-store"});
-  return data?.aboutStory || null;
-}
+export const getAboutStory = cache(async (): Promise<AboutStory | null> => {
+  const data = await client.fetch(
+    ABOUT_STORY_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.aboutStory ?? null;
+});

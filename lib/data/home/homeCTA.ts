@@ -1,4 +1,5 @@
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 
 // ✅ Types
@@ -77,7 +78,14 @@ export const CTA_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getCTA(): Promise<CTAData | null> {
-  const data = await client.fetch(CTA_QUERY, {}, { cache: "no-store"});
-  return data?.cta || null;
-}
+export const getCTA = cache(async (): Promise<CTAData | null> => {
+  const data = await client.fetch(
+    CTA_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.cta ?? null;
+});

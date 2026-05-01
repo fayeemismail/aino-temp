@@ -1,5 +1,6 @@
 // lib/data/global/footerData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 
@@ -114,7 +115,14 @@ export const FOOTER_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getFooter(): Promise<FooterData | null> {
-  const data = await client.fetch(FOOTER_QUERY, {}, { cache: "no-store"});
-  return data || null;
-}
+export const getFooter = cache(async (): Promise<FooterData | null> => {
+  const data = await client.fetch(
+    FOOTER_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data ?? null;
+});

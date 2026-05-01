@@ -1,5 +1,6 @@
 // lib/data/services/additionalCapabilitiesData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface CapabilityTheme {
@@ -73,7 +74,14 @@ export const ADDITIONAL_CAPABILITIES_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getAdditionalCapabilities(): Promise<AdditionalCapabilities | null> {
-  const data = await client.fetch(ADDITIONAL_CAPABILITIES_QUERY, {}, { cache: "no-store"});
-  return data?.additionalCapabilities || null;
-}
+export const getAdditionalCapabilities = cache(async (): Promise<AdditionalCapabilities | null> => {
+  const data = await client.fetch(
+    ADDITIONAL_CAPABILITIES_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.additionalCapabilities ?? null;
+});

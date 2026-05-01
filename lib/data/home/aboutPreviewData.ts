@@ -1,5 +1,6 @@
 //lib/data/home/aboutPreviewData
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 
 
@@ -82,7 +83,14 @@ export const ABOUT_QUERY = `
 
 
 
-export async function getAboutPreview(): Promise<AboutPreview | null> {
-  const data = await client.fetch(ABOUT_QUERY, {}, { cache: "no-store"});
-  return data?.aboutPreview || null;
-}
+export const getAboutPreview = cache(async (): Promise<AboutPreview | null> => {
+  const data = await client.fetch(
+    ABOUT_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.aboutPreview ?? null;
+});

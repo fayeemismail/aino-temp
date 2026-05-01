@@ -1,5 +1,6 @@
 // lib/data/contact/contactHeroData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface ContactHeroHeading {
@@ -61,7 +62,15 @@ export const CONTACT_HERO_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getContactHero(): Promise<ContactHero | null> {
-  const data = await client.fetch(CONTACT_HERO_QUERY, {}, { cache: "no-store"});
-  return data?.contactHero || null;
-}
+
+export const getContactHero = cache(async (): Promise<ContactHero | null> => {
+  const data = await client.fetch(
+    CONTACT_HERO_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.contactHero ?? null;
+});

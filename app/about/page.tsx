@@ -23,13 +23,24 @@ export const metadata = {
   },
 };
 
+export const revalidate = 60;
+
 export default async function AboutPage() {
-  const aboutHero = await getAboutHero();
-  const aboutStory = await getAboutStory();
-  const aboutValues = await getAboutValues();
-  const aboutProcess = await getAboutProcess();
-  const aboutStats = await getAboutStats();
-  const closing = await getAboutClosing();
+  const [
+    aboutHero,
+    aboutStory,
+    aboutValues,
+    aboutProcess,
+    aboutStats,
+    closing
+  ] = await Promise.all([
+    getAboutHero(),
+    getAboutStory(),
+    getAboutValues(),
+    getAboutProcess(),
+    getAboutStats(),
+    getAboutClosing()
+  ]);
 
   return (
     <div className="min-h-screen pt-20">

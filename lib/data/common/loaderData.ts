@@ -1,5 +1,6 @@
 // lib/data/global/loaderData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface LoaderTheme {
@@ -65,7 +66,14 @@ export const LOADER_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getLoader(): Promise<LoaderData | null> {
-  const data = await client.fetch(LOADER_QUERY, {}, { cache: "no-store"});
-  return data || null;
-}
+export const getLoader = cache(async (): Promise<LoaderData | null> => {
+  const data = await client.fetch(
+    LOADER_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data ?? null;
+});

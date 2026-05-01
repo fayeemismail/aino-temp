@@ -1,4 +1,5 @@
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // lib/data/home/heroData.ts (update with these types)
 export interface HeroHeading {
@@ -71,12 +72,10 @@ export const HERO_QUERY = `
   }
 `;
 
-export async function getHero(): Promise<Hero | null> {
-  const data = await client.fetch(HERO_QUERY, {}, { cache: "no-store"});
+export const getHero = cache(async (): Promise<Hero | null> => {
+  const data = await client.fetch(HERO_QUERY, {}, {
+    next: { revalidate: 60 }
+  });
 
-  // If nested inside "home"
   return data?.hero ?? null;
-
-  // If standalone, use:
-  // return data ?? null;
-}
+});

@@ -13,17 +13,26 @@ import { getHero } from "@/lib/data/home/heroData";
 import { getServices } from "@/lib/data/home/serviceData";
 import { getWhyChooseUs } from "@/lib/data/home/whyChooseUs";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function Home() {
-  const hero = await getHero();
-  const services = await getServices();
-  const whyChooseUs = await getWhyChooseUs();
-  const about = await getAboutPreview();
-  const clients = await getClientsSection();
-  const blog = await getBlogPreview();
-  const cta = await getCTA();
-  console.log(services)
+  const [
+    hero,
+    services,
+    whyChooseUs,
+    about,
+    clients,
+    blog,
+    cta
+  ] = await Promise.all([
+    getHero(),
+    getServices(),
+    getWhyChooseUs(),
+    getAboutPreview(),
+    getClientsSection(),
+    getBlogPreview(),
+    getCTA()
+  ]);
 
   return (
     <main>

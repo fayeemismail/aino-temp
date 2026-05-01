@@ -1,5 +1,6 @@
 // lib/data/blog/blogCategoriesData.ts
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 // ✅ Types
 export interface BlogCategoriesTheme {
@@ -44,7 +45,14 @@ export const BLOG_CATEGORIES_QUERY = `
 
 
 // ✅ Fetch Function
-export async function getBlogCategories(): Promise<BlogCategories | null> {
-  const data = await client.fetch(BLOG_CATEGORIES_QUERY, {}, { cache: "no-store"});
-  return data?.blogCategories || null;
-}
+export const getBlogCategories = cache(async (): Promise<BlogCategories | null> => {
+  const data = await client.fetch(
+    BLOG_CATEGORIES_QUERY,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return data?.blogCategories ?? null;
+});

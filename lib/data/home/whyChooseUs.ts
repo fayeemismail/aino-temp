@@ -1,4 +1,5 @@
 import { client } from "@/lib/sanity";
+import { cache } from "react";
 
 export interface WhyChooseItem {
   title: string;
@@ -57,8 +58,14 @@ export const whyChooseUsQuery = `
 `;
 
 
-export async function getWhyChooseUs(): Promise<WhyChooseUsSection | null> {
-  const data = await client.fetch(whyChooseUsQuery, {}, { cache: "no-store"});
+export const getWhyChooseUs = cache(async (): Promise<WhyChooseUsSection | null> => {
+  const data = await client.fetch(
+    whyChooseUsQuery,
+    {},
+    {
+      next: { revalidate: 60 },
+    }
+  );
 
   return data?.whyChooseUs ?? null;
-}
+});
