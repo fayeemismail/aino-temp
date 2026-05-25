@@ -10,16 +10,30 @@ export interface ServiceItem {
 
 export interface ServicesTheme {
   sectionBg?: string;
-  heading?: string;
+
+  // Heading
+  headingColor?: string;
+  headingGradient?: string;
+
   description?: string;
+
+  // Card
   cardBg?: string;
   cardBorder?: string;
   cardHoverOverlay?: string;
+
+  // Icon
   iconGradient?: string;
+
+  // Title hover gradient
   titleHoverGradient?: string;
+
+  // Arrows
   arrowBg?: string;
   arrowBorder?: string;
   arrowText?: string;
+
+  // Scroll hint
   scrollHintText?: string;
 }
 
@@ -35,7 +49,6 @@ export interface HomeData {
   services?: ServicesSection;
 }
 
-
 export const servicesQuery = `
   *[_type == "home"][0]{
     services{
@@ -44,7 +57,10 @@ export const servicesQuery = `
       showScrollHint,
       theme{
         sectionBg,
-        heading,
+
+        headingColor,
+        headingGradient,
+
         description,
         cardBg,
         cardBorder,
@@ -56,6 +72,7 @@ export const servicesQuery = `
         arrowText,
         scrollHintText
       },
+
       items[]{
         title,
         description,
@@ -66,16 +83,16 @@ export const servicesQuery = `
   }
 `;
 
+export const getServices = cache(
+  async (): Promise<ServicesSection | null> => {
+    const data: HomeData = await client.fetch(
+      servicesQuery,
+      {},
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
-
-export const getServices = cache(async (): Promise<ServicesSection | null> => {
-  const data: HomeData = await client.fetch(
-    servicesQuery,
-    {},
-    {
-      next: { revalidate: 60 }, // revalidate every 60 seconds
-    }
-  );
-
-  return data?.services ?? null;
-});
+    return data?.services ?? null;
+  }
+);

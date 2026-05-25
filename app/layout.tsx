@@ -92,7 +92,7 @@ export default async function RootLayout({
           <GoogleTagManager gtmId="GTM-MHDFDVJT" />
           {children}
           <GoogleAnalytics gaId="G-N9JEHEQ812" />
-          <Loader />
+          {/* <Loader /> */}
         </main>
         {footer && <Footer data={footer} />}
       </body>

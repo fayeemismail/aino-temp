@@ -3,23 +3,39 @@
 export interface ServiceItem {
   title: string;
   description: string;
-  icon: string;        // 'code' | 'brain' | 'cart' | 'cloud'
+  icon: string;
   gradient: string;
 }
 
 export interface ServicesTheme {
-  arrowBg?: string;
-  arrowBorder?: string;
-  arrowText?: string;
+  // Section
+  sectionBg?: string;
+
+  // Heading
+  headingColor?: string;
+  headingGradient?: string;
+
+  // Description
+  description?: string;
+
+  // Card
   cardBg?: string;
   cardBorder?: string;
   cardHoverOverlay?: string;
-  description?: string;
-  heading?: string;
+
+  // Icon
   iconGradient?: string;
-  scrollHintText?: string;
-  sectionBg?: string;
+
+  // Title hover gradient
   titleHoverGradient?: string;
+
+  // Arrows
+  arrowBg?: string;
+  arrowBorder?: string;
+  arrowText?: string;
+
+  // Scroll hint
+  scrollHintText?: string;
 }
 
 export interface ServicesData {
@@ -30,7 +46,7 @@ export interface ServicesData {
   theme?: ServicesTheme;
 }
 
-// Optional: Type for what Sanity actually returns
+// Optional: Raw Sanity return type
 export type ServicesSection = {
   title?: string | null;
   description?: string | null;

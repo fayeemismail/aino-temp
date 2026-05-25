@@ -80,7 +80,7 @@ export function Navbar({ initialData }: NavbarProps) {
                 alt={`${logo.textPrimary}${logo.textSecondary}`}
                 height={100}
                 width={100}
-                className="h-15 w-auto"
+                className="h-10 w-auto"
               />
             ) : (
               <div className="text-2xl tracking-tight">

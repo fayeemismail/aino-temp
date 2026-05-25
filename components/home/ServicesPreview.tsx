@@ -31,7 +31,7 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
 
   // Filter out invalid items and normalize data
   const validItems = services.items
-    .filter((item): item is NonNullable<typeof item> => 
+    .filter((item): item is NonNullable<typeof item> =>
       !!item && !!item.title && !!item.description && !!item.gradient
     )
     .map(item => ({
@@ -75,8 +75,8 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
   };
 
   return (
-    <section 
-      className="py-32 relative" 
+    <section
+      className="py-32 relative"
       style={{ backgroundColor: data.theme?.sectionBg }}
     >
       <div className="w-full px-6 lg:px-12">
@@ -88,14 +88,14 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <h2 
+            <h2
               className="text-4xl lg:text-5xl mb-4"
-              style={{ color: data.theme?.heading }}
+              style={{ color: data.theme?.headingColor }}
             >
               {data.title}
             </h2>
             {data.description && (
-              <p 
+              <p
                 className="text-lg max-w-2xl"
                 style={{ color: data.theme?.description }}
               >
@@ -155,7 +155,7 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
                   whileHover={{ y: -8 }}
                   className="service-card w-full lg:w-80 xl:w-96 shrink-0 snap-start group"
                 >
-                  <div 
+                  <div
                     className="relative h-full p-8 backdrop-blur-md rounded-3xl border overflow-hidden"
                     style={{
                       backgroundColor: data.theme?.cardBg,
@@ -178,10 +178,15 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
                       </motion.div>
                     </div>
 
-                    <h3 
-                      className="text-2xl mb-3 transition-all duration-300 group-hover:bg-clip-text group-hover:bg-linear-to-r"
-                      style={{ 
-                        color: data.theme?.heading,
+                    <h3
+                      className={`text-2xl mb-3 transition-all duration-300 ${data.theme?.headingGradient
+                          ? "bg-clip-text text-transparent"
+                          : ""
+                        }`}
+                      style={{
+                        color: data.theme?.headingColor,
+
+                        backgroundImage: data.theme?.headingGradient,
                       }}
                     >
                       {service.title}
