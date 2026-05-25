@@ -16,7 +16,7 @@ export const metadata = {
     "Explore Ainorax services including web development, AI solutions, cloud, and digital transformation.",
 };
 
-export const revalidate = REVALIDATE_TIME_SERVICE; // services don't change often
+export const revalidate = 1209600; // services don't change often
 
 export default async function ServicesPage() {
   const [

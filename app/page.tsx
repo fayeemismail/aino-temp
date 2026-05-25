@@ -14,7 +14,7 @@ import { getServices } from "@/lib/data/home/serviceData";
 import { getWhyChooseUs } from "@/lib/data/home/whyChooseUs";
 import { REVALIDATE_TIME_HOME } from "@/lib/config/site";
 
-export const revalidate = REVALIDATE_TIME_HOME;
+export const revalidate = 604800;
 
 export default async function Home() {
   const [

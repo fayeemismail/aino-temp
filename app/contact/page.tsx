@@ -14,7 +14,7 @@ export const metadata = {
     "Contact Ainorax to build your next web, AI, or digital solution.",
 };
 
-export const revalidate = REVALIDATE_TIME_CONTACT;
+export const revalidate = 604800;
 
 export default async function ContactPage() {
   const [

@@ -14,7 +14,7 @@ export const metadata = {
     "Read insights on AI, web development, and digital innovation from Ainorax.",
 };
 
-export const revalidate = REVALIDATE_TIME_BLOG;
+export const revalidate = 604800;
 
 export default async function BlogPage() {
   const [

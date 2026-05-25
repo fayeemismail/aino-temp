@@ -62,7 +62,7 @@ export const metadata: Metadata = {
 };
 
 
-export const revalidate = REVALIDATE_TIME_LAYOUT; 
+export const revalidate = 604800; 
 
 export default async function RootLayout({
   children,
