@@ -2,6 +2,7 @@ import { ContactCTA } from "@/components/contact/ContactCTA";
 import { ContactHero } from "@/components/contact/ContactHero";
 import { ContactLocation } from "@/components/contact/ContactLocation";
 import { ContactMain } from "@/components/contact/ContactMain";
+import { REVALIDATE_TIME_CONTACT } from "@/lib/config/site";
 import { getContactCTA } from "@/lib/data/contact/contactCTAData";
 import { getContactHero } from "@/lib/data/contact/contactHeroData";
 import { getContactLocation } from "@/lib/data/contact/contactLocationData";
@@ -13,7 +14,7 @@ export const metadata = {
     "Contact Ainorax to build your next web, AI, or digital solution.",
 };
 
-export const revalidate = 60;
+export const revalidate = REVALIDATE_TIME_CONTACT;
 
 export default async function ContactPage() {
   const [

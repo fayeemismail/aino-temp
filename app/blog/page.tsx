@@ -2,6 +2,7 @@ import { BlogCategories } from "@/components/blog/BlogCategories";
 import { BlogHero } from "@/components/blog/BlogHero";
 import { FeaturedPost } from "@/components/blog/FeaturedPost";
 import { RecentPosts } from "@/components/blog/RecentPosts";
+import { REVALIDATE_TIME_BLOG } from "@/lib/config/site";
 import { getBlogCategories } from "@/lib/data/blog/blogCategoriesData";
 import { getBlogHero } from "@/lib/data/blog/blogHeroData";
 import { getFeaturedPost } from "@/lib/data/blog/featuredPostData";
@@ -13,7 +14,7 @@ export const metadata = {
     "Read insights on AI, web development, and digital innovation from Ainorax.",
 };
 
-export const revalidate = 60;
+export const revalidate = REVALIDATE_TIME_BLOG;
 
 export default async function BlogPage() {
   const [

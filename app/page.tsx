@@ -12,8 +12,9 @@ import { getCTA } from "@/lib/data/home/homeCTA";
 import { getHero } from "@/lib/data/home/heroData";
 import { getServices } from "@/lib/data/home/serviceData";
 import { getWhyChooseUs } from "@/lib/data/home/whyChooseUs";
+import { REVALIDATE_TIME_HOME } from "@/lib/config/site";
 
-export const revalidate = 60;
+export const revalidate = REVALIDATE_TIME_HOME;
 
 export default async function Home() {
   const [

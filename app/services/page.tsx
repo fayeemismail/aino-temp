@@ -3,6 +3,7 @@ import { MainServices } from "@/components/service/MainServices";
 import { ServicesHero } from "@/components/service/ServiceHero";
 import { ServicesComingSoon } from "@/components/service/ServicesComingSoon";
 import { ServicesCTA } from "@/components/service/ServicesCTA";
+import { REVALIDATE_TIME_SERVICE } from "@/lib/config/site";
 import { getAdditionalCapabilities } from "@/lib/data/service/additionalCapabilitiesData";
 import { getMainServices } from "@/lib/data/service/mainServicesData";
 import { getServicesComingSoon } from "@/lib/data/service/servicesComingSoonData";
@@ -15,7 +16,7 @@ export const metadata = {
     "Explore Ainorax services including web development, AI solutions, cloud, and digital transformation.",
 };
 
-export const revalidate = 300; // services don't change often
+export const revalidate = REVALIDATE_TIME_SERVICE; // services don't change often
 
 export default async function ServicesPage() {
   const [

@@ -7,6 +7,7 @@ import Loader from "@/components/common/Loader";
 import { getBackground } from "@/lib/data/common/bgData";
 import { getFooter } from "@/lib/data/common/footerData";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { REVALIDATE_TIME_LAYOUT } from "@/lib/config/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.ainorax.com"),
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
 };
 
 
-export const revalidate = 300; 
+export const revalidate = REVALIDATE_TIME_LAYOUT; 
 
 export default async function RootLayout({
   children,
@@ -92,7 +93,7 @@ export default async function RootLayout({
           <GoogleTagManager gtmId="GTM-MHDFDVJT" />
           {children}
           <GoogleAnalytics gaId="G-N9JEHEQ812" />
-          {/* <Loader /> */}
+          <Loader />
         </main>
         {footer && <Footer data={footer} />}
       </body>

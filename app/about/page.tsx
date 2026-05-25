@@ -4,6 +4,7 @@ import { AboutProcess } from "@/components/about/AboutProcess";
 import { AboutStats } from "@/components/about/AboutStats";
 import { AboutStory } from "@/components/about/AboutStory";
 import { AboutValues } from "@/components/about/AboutValues";
+import { REVALIDATE_TIME_ABOUT } from "@/lib/config/site";
 import { getAboutClosing } from "@/lib/data/about/aboutClosingData";
 import { getAboutHero } from "@/lib/data/about/aboutHeroData";
 import { getAboutProcess } from "@/lib/data/about/aboutProcessData";
@@ -23,7 +24,7 @@ export const metadata = {
   },
 };
 
-export const revalidate = 60;
+export const revalidate = REVALIDATE_TIME_ABOUT;
 
 export default async function AboutPage() {
   const [
