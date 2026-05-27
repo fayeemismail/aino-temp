@@ -8,6 +8,7 @@ import { getBackground } from "@/lib/data/common/bgData";
 import { getFooter } from "@/lib/data/common/footerData";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { REVALIDATE_TIME_LAYOUT } from "@/lib/config/site";
+import LazyAnalytics from "@/components/common/LazyAnalytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.ainorax.com"),
@@ -88,11 +89,10 @@ export default async function RootLayout({
         style={{ backgroundColor: bg?.bgColor, color: "white" }}
         suppressHydrationWarning
       >
+        <LazyAnalytics />
         <Navbar initialData={navbarData} />
         <main>
-          <GoogleTagManager gtmId="GTM-MHDFDVJT" />
           {children}
-          <GoogleAnalytics gaId="G-N9JEHEQ812" />
           <Loader />
         </main>
         {footer && <Footer data={footer} />}

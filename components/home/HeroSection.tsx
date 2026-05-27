@@ -22,15 +22,18 @@ export function HeroSection({ hero }: HeroSectionProps) {
     theme,
   } = hero;
 
-  const [isMounted, setIsMounted] = useState(false);
+  // const [isMounted, setIsMounted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
 
-  if (!heading || heading.length === 0 || !isMounted) return null;
+  if (!heading 
+    // || heading.length === 0 
+    // || !isMounted
+  ) return null;
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
