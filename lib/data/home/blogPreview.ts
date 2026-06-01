@@ -9,6 +9,8 @@ export interface BlogCard {
   category?: string;
   readTime?: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   slug?: string;
 }
 
@@ -73,6 +75,8 @@ export const BLOG_PREVIEW_QUERY = `
       category,
       readTime,
       "image": image.asset->url,
+      "imageWidth": image.asset->metadata.dimensions.width,
+      "imageHeight": image.asset->metadata.dimensions.height,
       "slug": slug.current
     },
 

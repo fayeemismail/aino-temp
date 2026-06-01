@@ -189,16 +189,25 @@ export function BlogPreview({ data }: BlogPreviewProps) {
           {header}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {featuredPost && (
-              <div className="lg:col-span-7 group cursor-pointer">
+              // ✅ Link added
+              <Link
+                href={`/blog/${featuredPost.slug}`}
+                className="lg:col-span-7 group cursor-pointer block"
+              >
                 <FeaturedPost post={featuredPost} theme={theme} />
-              </div>
+              </Link>
             )}
             {secondaryPosts && secondaryPosts.length > 0 && (
               <div className="lg:col-span-5 space-y-6">
                 {secondaryPosts.map((post: BlogCard) => (
-                  <div key={post.title} className="group cursor-pointer">
+                  // ✅ Link added
+                  <Link
+                    key={post.title}
+                    href={`/blog/${post.slug}`}
+                    className="group cursor-pointer block"
+                  >
                     <SecondaryPost post={post} theme={theme} />
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}
@@ -255,29 +264,34 @@ export function BlogPreview({ data }: BlogPreviewProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {featuredPost && (
+            // ✅ Link added inside motion.div
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-7 group cursor-pointer"
+              className="lg:col-span-7"
             >
-              <FeaturedPost post={featuredPost} theme={theme} />
+              <Link href={`/blog/${featuredPost.slug}`} className="group cursor-pointer block">
+                <FeaturedPost post={featuredPost} theme={theme} />
+              </Link>
             </motion.div>
           )}
 
           {secondaryPosts && secondaryPosts.length > 0 && (
             <div className="lg:col-span-5 space-y-6">
               {secondaryPosts.map((post: BlogCard, index: number) => (
+                // ✅ Link added inside motion.div
                 <motion.div
                   key={post.title}
                   initial={{ opacity: 0, x: 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="group cursor-pointer"
                 >
-                  <SecondaryPost post={post} theme={theme} />
+                  <Link href={`/blog/${post.slug}`} className="group cursor-pointer block">
+                    <SecondaryPost post={post} theme={theme} />
+                  </Link>
                 </motion.div>
               ))}
             </div>

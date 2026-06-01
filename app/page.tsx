@@ -35,6 +35,8 @@ export default async function Home() {
     getCTA()
   ]);
 
+  // console.log(blog)
+
   return (
     <main>
       {hero && <HeroSection hero={hero} />}
