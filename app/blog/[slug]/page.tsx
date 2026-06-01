@@ -34,8 +34,7 @@ export default async function BlogPostPage({ params }: Props) {
     const { slug } = await params;
     const post = await client.fetch(query, { slug });
 
-    console.log("slug", slug);
-    console.log("Post", post)
+
 
     if (!post) notFound();
 
