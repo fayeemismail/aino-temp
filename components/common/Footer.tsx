@@ -76,6 +76,9 @@ export function Footer({ data }: FooterProps) {
                         if (theme?.socialBg) e.currentTarget.style.background = theme.socialBg;
                       }}
                       aria-label={social.label}
+                      data-track-click="social_click"
+                      data-track-category="social"
+                      data-track-label={`Footer Social - ${social.label}`}
                     >
                       {Icon && (
                         <Icon
@@ -126,6 +129,9 @@ export function Footer({ data }: FooterProps) {
                         onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
                           if (theme?.textSecondary) e.currentTarget.style.color = theme.textSecondary;
                         }}
+                        data-track-click="footer_nav_click"
+                        data-track-category="navigation"
+                        data-track-label={`Footer QuickLink - ${link.label}`}
                       >
                         {link.label}
                       </Link>
@@ -192,6 +198,9 @@ export function Footer({ data }: FooterProps) {
                     onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
                       if (theme?.textMuted) e.currentTarget.style.color = theme.textMuted;
                     }}
+                    data-track-click="footer_bottom_click"
+                    data-track-category="navigation"
+                    data-track-label={`Footer Bottom - ${link.label}`}
                   >
                     {link.label}
                   </a>

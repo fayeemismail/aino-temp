@@ -57,6 +57,9 @@ export function HomeCTA({ data }: HomeCTAProps) {
                   whileTap={{ scale: 0.95 }}
                   className="group px-8 py-4 rounded-full font-medium flex items-center gap-2"
                   style={{ background: theme?.primaryBg, color: theme?.primaryText }}
+                  data-track-click="cta_click"
+                  data-track-category="engagement"
+                  data-track-label={`Home CTA - ${primaryButton.text}`}
                 >
                   {primaryButton.text}
                   <LuArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -75,6 +78,9 @@ export function HomeCTA({ data }: HomeCTAProps) {
                     color: theme?.secondaryText,
                     borderColor: theme?.secondaryBorder,
                   }}
+                  data-track-click="cta_click"
+                  data-track-category="engagement"
+                  data-track-label={`Home CTA Secondary - ${secondaryButton.text}`}
                   onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
                     if (theme?.secondaryHover) e.currentTarget.style.background = theme.secondaryHover;
                   }}
@@ -95,6 +101,9 @@ export function HomeCTA({ data }: HomeCTAProps) {
                   color: theme?.secondaryText,
                   borderColor: theme?.secondaryBorder,
                 }}
+                data-track-click="cta_click"
+                data-track-category="engagement"
+                data-track-label={`Home CTA Secondary - ${secondaryButton.text}`}
                 onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
                   if (theme?.secondaryHover) e.currentTarget.style.background = theme.secondaryHover;
                 }}

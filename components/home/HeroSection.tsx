@@ -97,6 +97,9 @@ export function HeroSection({ hero }: HeroSectionProps) {
                       ? theme.buttonHover
                       : theme.buttonBg,
                   }}
+                  data-track-click="cta_click"
+                  data-track-category="engagement"
+                  data-track-label={`Hero CTA - ${primaryButton.text}`}
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     {primaryButton.text}

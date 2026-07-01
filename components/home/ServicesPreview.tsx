@@ -118,6 +118,9 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
               color: data.theme?.arrowText,
             }}
             aria-label="Scroll left"
+            data-track-click="services_scroll_click"
+            data-track-category="engagement"
+            data-track-label="Services Scroll - Left"
           >
             <LuArrowLeft className="w-5 h-5" />
           </button>
@@ -133,6 +136,9 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
               color: data.theme?.arrowText,
             }}
             aria-label="Scroll right"
+            data-track-click="services_scroll_click"
+            data-track-category="engagement"
+            data-track-label="Services Scroll - Right"
           >
             <LuArrowRight className="w-5 h-5" />
           </button>
@@ -154,6 +160,9 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                   whileHover={{ y: -8 }}
                   className="service-card w-full lg:w-80 xl:w-96 shrink-0 snap-start group"
+                  data-track-click="service_card_click"
+                  data-track-category="engagement"
+                  data-track-label={`Service Card - ${service.title}`}
                 >
                   <div
                     className="relative h-full p-8 backdrop-blur-md rounded-3xl border overflow-hidden"

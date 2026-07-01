@@ -126,6 +126,9 @@ export function AboutPreview({ data }: AboutPreviewProps) {
                   }}
                   onMouseEnter={e => { if (theme?.ctaHover) e.currentTarget.style.background = theme.ctaHover; }}
                   onMouseLeave={e => { if (theme?.ctaBg) e.currentTarget.style.background = theme.ctaBg; }}
+                  data-track-click="cta_click"
+                  data-track-category="engagement"
+                  data-track-label={`About Preview CTA - ${cta.text}`}
                 >
                   {cta.text}
                   <LuArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />

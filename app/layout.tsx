@@ -6,7 +6,6 @@ import { getNavbar } from "@/lib/data/common/navbarData";
 import Loader from "@/components/common/Loader";
 import { getBackground } from "@/lib/data/common/bgData";
 import { getFooter } from "@/lib/data/common/footerData";
-import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { REVALIDATE_TIME_LAYOUT } from "@/lib/config/site";
 import LazyAnalytics from "@/components/common/LazyAnalytics";
 

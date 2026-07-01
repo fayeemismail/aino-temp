@@ -52,6 +52,9 @@ export function ClientsSection({ data }: ClientsSectionProps) {
               whileHover={{ y: -6 }}
               className="group relative overflow-hidden rounded-3xl border cursor-pointer"
               style={{ borderColor: theme?.cardBorder }}
+              data-track-click="client_card_click"
+              data-track-category="engagement"
+              data-track-label={`Client Card - ${client.name}`}
             >
               <div className="relative aspect-4/3 w-full overflow-hidden">
                 {client.image && (

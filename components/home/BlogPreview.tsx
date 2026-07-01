@@ -173,6 +173,9 @@ export function BlogPreview({ data }: BlogPreviewProps) {
             onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
               if (theme?.ctaText) e.currentTarget.style.color = theme.ctaText;
             }}
+            data-track-click="cta_click"
+            data-track-category="engagement"
+            data-track-label={`Blog Preview CTA - ${cta.text}`}
           >
             {cta.text}
             <LuArrowRight className="w-5 h-5" />
@@ -193,6 +196,9 @@ export function BlogPreview({ data }: BlogPreviewProps) {
               <Link
                 href={`/blog/${featuredPost.slug}`}
                 className="lg:col-span-7 group cursor-pointer block"
+                data-track-click="blog_click"
+                data-track-category="engagement"
+                data-track-label={`Featured Blog - ${featuredPost.title}`}
               >
                 <FeaturedPost post={featuredPost} theme={theme} />
               </Link>
@@ -205,6 +211,9 @@ export function BlogPreview({ data }: BlogPreviewProps) {
                     key={post.title}
                     href={`/blog/${post.slug}`}
                     className="group cursor-pointer block"
+                    data-track-click="blog_click"
+                    data-track-category="engagement"
+                    data-track-label={`Blog Post - ${post.title}`}
                   >
                     <SecondaryPost post={post} theme={theme} />
                   </Link>
@@ -254,6 +263,9 @@ export function BlogPreview({ data }: BlogPreviewProps) {
                 onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
                   if (theme?.ctaText) e.currentTarget.style.color = theme.ctaText;
                 }}
+                data-track-click="cta_click"
+                data-track-category="engagement"
+                data-track-label={`Blog Preview CTA - ${cta.text}`}
               >
                 {cta.text}
                 <LuArrowRight className="w-5 h-5" />
@@ -272,7 +284,13 @@ export function BlogPreview({ data }: BlogPreviewProps) {
               transition={{ duration: 0.6 }}
               className="lg:col-span-7"
             >
-              <Link href={`/blog/${featuredPost.slug}`} className="group cursor-pointer block">
+              <Link 
+                href={`/blog/${featuredPost.slug}`} 
+                className="group cursor-pointer block"
+                data-track-click="blog_click"
+                data-track-category="engagement"
+                data-track-label={`Featured Blog - ${featuredPost.title}`}
+              >
                 <FeaturedPost post={featuredPost} theme={theme} />
               </Link>
             </motion.div>
@@ -289,7 +307,13 @@ export function BlogPreview({ data }: BlogPreviewProps) {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                 >
-                  <Link href={`/blog/${post.slug}`} className="group cursor-pointer block">
+                  <Link 
+                    href={`/blog/${post.slug}`} 
+                    className="group cursor-pointer block"
+                    data-track-click="blog_click"
+                    data-track-category="engagement"
+                    data-track-label={`Blog Post - ${post.title}`}
+                  >
                     <SecondaryPost post={post} theme={theme} />
                   </Link>
                 </motion.div>

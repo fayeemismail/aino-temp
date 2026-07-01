@@ -4,10 +4,10 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.ainorax.com";
 
 export const GTM_ID =
-  process.env.NEXT_PUBLIC_GTM_ID || "";
+  process.env.NEXT_PUBLIC_GTM_ID || "GTM-MHDFDVJT";
 
 export const GA_ID =
-  process.env.NEXT_PUBLIC_GA_ID || "";
+  process.env.NEXT_PUBLIC_GA_ID || "G-N9JEHEQ812";
 
 // Revalidate Time
 export const REVALIDATE_TIME_LAYOUT = Number(

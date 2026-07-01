@@ -73,7 +73,13 @@ export function Navbar({ initialData }: NavbarProps) {
         <div className="flex items-center justify-between h-20">
           
           {/* Logo */}
-          <Link href={logo.link} className="group">
+          <Link 
+            href={logo.link} 
+            className="group"
+            data-track-click="nav_click"
+            data-track-category="navigation"
+            data-track-label="Header - Logo"
+          >
             {logo.image ? (
               <Image 
                 src={logo.image} 
@@ -103,6 +109,9 @@ export function Navbar({ initialData }: NavbarProps) {
                   key={item.path}
                   href={item.path}
                   className="relative group py-1"
+                  data-track-click="nav_click"
+                  data-track-category="navigation"
+                  data-track-label={`Desktop - ${item.label}`}
                 >
                   <span
                     className="text-sm tracking-wide transition-colors duration-300"
@@ -149,6 +158,9 @@ export function Navbar({ initialData }: NavbarProps) {
             className="md:hidden p-2 -mr-2"
             aria-label="Toggle menu"
             style={{ color: theme.text }}
+            data-track-click="nav_menu_toggle"
+            data-track-category="navigation"
+            data-track-label={`Mobile Menu Toggle`}
           >
             {isMenuOpen ? <LuX size={28} /> : <LuMenu size={28} />}
           </button>
@@ -174,6 +186,9 @@ export function Navbar({ initialData }: NavbarProps) {
                   href={item.path}
                   onClick={() => setIsMenuOpen(false)}
                   className="text-lg tracking-wide py-1 transition-colors"
+                  data-track-click="nav_click"
+                  data-track-category="navigation"
+                  data-track-label={`Mobile - ${item.label}`}
                   style={{
                     color: isActive ? theme.textActive : theme.textSecondary
                   }}
