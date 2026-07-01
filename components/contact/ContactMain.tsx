@@ -165,6 +165,9 @@ export function ContactMain({ data }: ContactMainProps) {
                     onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                       e.currentTarget.style.background = "rgba(255,255,255,0.05)";
                     }}
+                    data-track-click="contact_card_click"
+                    data-track-category="engagement"
+                    data-track-label={`Contact Card - ${contact.title}: ${contact.value}`}
                   >
                     <div className="flex items-start gap-4">
                       {Icon && (
