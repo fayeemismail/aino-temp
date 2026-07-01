@@ -37,6 +37,9 @@ export function BlogCategories({ data }: BlogCategoriesProps) {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActive(category)}
                 className="px-6 py-3 rounded-full text-sm transition-all duration-300 border"
+                data-track-click="blog_category_click"
+                data-track-category="engagement"
+                data-track-label={`Blog Category - ${category}`}
                 style={
                   isActive
                     ? {

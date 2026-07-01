@@ -43,6 +43,9 @@ export function ServicesCTA({ data }: ServicesCTAProps) {
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 rounded-full font-medium"
                 style={{ background: theme?.buttonGradient, color: theme?.buttonTextColor }}
+                data-track-click="cta_click"
+                data-track-category="engagement"
+                data-track-label={`Services CTA - ${primaryButton.text}`}
               >
                 {primaryButton.text}
               </motion.button>

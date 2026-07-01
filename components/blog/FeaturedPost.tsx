@@ -20,6 +20,9 @@ export function FeaturedPost({ data }: FeaturedPostProps) {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="group cursor-pointer"
+          data-track-click="blog_click"
+          data-track-category="engagement"
+          data-track-label={`Featured Blog - ${title}`}
         >
           <div
             className="relative backdrop-blur-lg rounded-3xl overflow-hidden border"

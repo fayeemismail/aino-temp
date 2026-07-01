@@ -39,6 +39,9 @@ export function RecentPosts({ data }: RecentPostsProps) {
               transition={{ delay: index * 0.1, duration: 0.6 }}
               whileHover={{ y: -6 }}
               className="group cursor-pointer"
+              data-track-click="blog_click"
+              data-track-category="engagement"
+              data-track-label={`Blog Post - ${post.title}`}
             >
               <div
                 className="relative backdrop-blur-lg rounded-3xl overflow-hidden border transition-all duration-500 h-full flex flex-col"

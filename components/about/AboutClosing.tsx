@@ -72,6 +72,9 @@ export function AboutClosing({ data }: AboutClosingProps) {
                   onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
                     if (cta.theme?.bgGradient) e.currentTarget.style.background = cta.theme.bgGradient;
                   }}
+                  data-track-click="cta_click"
+                  data-track-category="engagement"
+                  data-track-label={`About Closing CTA - ${cta.text}`}
                 >
                   {cta.text}
                   <LuArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
